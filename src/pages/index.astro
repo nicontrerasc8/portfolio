@@ -17,236 +17,420 @@ import ContactCTA from '../components/ContactCTA.astro';
 import Skills from '../components/Skills.astro';
 
 // Content Fetching: List four most recent work projects
-const projects = (await getCollection('work'))
-	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-	.slice(0, 4);
+const projects = [
+	{
+		title: "Un Ratito con Dios",
+		publishDate: "2023-06-10 00:00:00",
+		img: "/assets/urcd.png",
+		img_alt: "Interfaz de la aplicación Un Ratito con Dios",
+		description: "Aplicación móvil con más de 1000 descargas, diseñada para fomentar la espiritualidad mediante herramientas interactivas y oración guiada.",
+		tags: ["Mobile App", "Spirituality", "UX/UI"],
+		link: "https://lnk.bio/unratitocondios"
+	},
+	{
+		title: "Matio",
+		publishDate: "2023-09-15 00:00:00",
+		img: "/assets/matio.png",
+		img_alt: "Plataforma interactiva para el aprendizaje de matemáticas",
+		description: "Aplicación web para el aprendizaje de matemáticas, gamificada y adaptada a diferentes niveles de conocimiento.",
+		tags: ["EdTech", "Web App", "Gamification"],
+		link: "https://matio.vercel.app/"
+	},
+	{
+		title: "Kompass Cargo",
+		publishDate: "2022-11-20 00:00:00",
+		img: "/assets/kc.png",
+		img_alt: "Landing page de Kompass Cargo",
+		description: "Landing page optimizada para Kompass Cargo, mejorando su presencia digital y captación de clientes.",
+		tags: ["Web Design", "Landing Page", "Logistics"],
+		link: "https://kompassc.vercel.app/"
+	},
+	{
+		title: "Tefio",
+		publishDate: "2023-04-05 00:00:00",
+		img: "/assets/tf.png",
+		img_alt: "Plataforma de gestión de préstamos para negocios",
+		description: "Aplicación web que permite a negocios gestionar préstamos con diferentes tasas de interés de manera eficiente.",
+		tags: ["FinTech", "Web App", "Automation"],
+		link: "https://tefio.vercel.app/"
+	},
+	{
+		title: "Bungalows Perú",
+		publishDate: "2023-02-12 00:00:00",
+		img: "/assets/bung.png",
+		img_alt: "SPA para agencia de viajes en Perú",
+		description: "Single page app diseñada para una agencia de viajes especializada en bungalows turísticos.",
+		tags: ["Travel", "Web Design", "SPA"],
+		link: "https://bungalowsperu.com"
+	},
+	{
+		title: "El Pez Nuestro de Cada Día",
+		publishDate: "2022-07-18 00:00:00",
+		img: "/assets/pez.png",
+		img_alt: "Web moderna para restaurante especializado en pescados y mariscos",
+		description: "Diseño y desarrollo de un sitio web para el restaurante 'El Pez Nuestro de Cada Día', destacando su oferta gastronómica.",
+		tags: ["Food", "Web Design", "Branding"],
+		link: "https://elpeznuestrodecadadia.vercel.app/"
+	},
+	{
+		title: "Grupo Pediátrico",
+		publishDate: "2023-08-01 00:00:00",
+		img: "/assets/gped.png",
+		img_alt: "Página web para uno de los grupos pediatricos más importantes de Lima",
+		description: "Página web para uno de los grupos pediatricos más importantes de Lima",
+		tags: ["UX/UI", "Salud", "Landing page"],
+		link: "https://www.gpediatrico.com/"
+	}
+];
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
 
 <BaseLayout>
-	<div class="stack gap-20 lg:gap-48">
-		<div class="wrapper stack gap-8 lg:gap-20">
-			<header class="hero">
-				<Hero
-					title="Hello, my name is Jeanine White"
-					tagline="I am a Creative Developer who is currently based in Portland, Oregon."
-					align="start"
-				>
-					<div class="roles">
-						<Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-						<Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill>
-						<Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
-					</div>
-				</Hero>
+  <div class="stack gap-20 lg:gap-48">
+    <div class="wrapper stack gap-8 lg:gap-20">
+      <header class="hero-container">
+        <div class="text-content">
+          <h1 class="title">Hola, soy Nicolás</h1>
+          <p class="tagline">Desarrollador fullstack y móvil, con experiencia en automatización de procesos e IA.</p>
 
-				<img
-					alt="Jeanine White smiling in a red plaid shirt and tortoise shell glasses"
-					width="480"
-					height="620"
-					src="/assets/portrait.jpg"
-				/>
-			</header>
+          <div class="roles">
+            <Pill><Icon icon="code" size="1.33em" color="var(--primary-color)" /> Smart worker</Pill>
+            <Pill><Icon icon="microphone-stage" size="1.33em" color="var(--accent-color)" /> Creative</Pill>
+            <Pill><Icon icon="pencil-line" size="1.33em" color="var(--secondary-color)" /> Results oriented</Pill>
+          </div>
+        </div>
 
-			<Skills />
-		</div>
+        <div class="image-content">
+          <img
+            alt="Nicolás Contreras smiling in a red plaid shirt and tortoise shell glasses"
+            width="480"
+            height="620"
+            src="/assets/portrait.jpeg"
+          />
+        </div>
+      </header>
 
-		<main class="wrapper stack gap-20 lg:gap-48">
-			<section class="section with-background with-cta">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Selected Work</h3>
-					<p>Take a look below at some of my featured work for clients from the past few years.</p>
-				</header>
+ 
+    </div>
 
-				<div class="gallery">
-					<Grid variant="offset">
-						{
-							projects.map((project) => (
-								<li>
-									<PortfolioPreview project={project} />
-								</li>
-							))
-						}
-					</Grid>
-				</div>
+    <main class="wrapper stack gap-20 lg:gap-48">
+      <section class="section with-background with-cta">
+        <header class="section-header stack gap-2 lg:gap-4">
+          <h3>Trabajos destacados</h3>
+          <p style={{marginBottom: "30px"}}>Desde proyectos universitarios hasta aplicaciones móviles. Todo con un enfoque de optimización, rápidez y eficiencia.</p>
+        </header>
 
-				<div class="cta">
-					<CallToAction href="/work/">
-						View All
-						<Icon icon="arrow-right" size="1.2em" />
-					</CallToAction>
-				</div>
-			</section>
+        <div class="gallery">
+          <Grid variant="offset">
+            {
+              projects.map((project) => (
+                <li>
+                  <div class="project-card">
+                    <img src={project.img} alt={project.img_alt} />
+                    <h4>{project.title}</h4>
+                    <p>{project.description}</p>
+                    <ul class="tags">
+                      {project.tags.map(tag => (
+                        <span class="tag">{tag}</span>
+                      ))}
+                    </ul>
+                    <a href={project.link} target="_blank" class="project-link">Ver proyecto</a>
+                  </div>
+                </li>
+              ))
+            }
+          </Grid>
+        </div>
 
-			<section class="section with-background bg-variant">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Mentions</h3>
-					<p>
-						I have been fortunate enough to receive praise for my work in several publications. Take
-						a look below to learn more.
-					</p>
-				</header>
+       <div class="cta">
+  <a href="https://wa.me/51949161510" target="_blank" class="cta-link">
+    ¿Tienes un proyecto en mente? Hablemos
+    <Icon icon="whatsapp" size="1.2em" />
+  </a>
+</div>
 
-				<div class="gallery">
-					<Grid variant="small">
-						{
-							['Medium', 'BuzzFeed', 'The Next Web', 'awwwards.', 'TechCrunch'].map((brand) => (
-								<li class="mention-card">
-									<p>{brand}</p>
-								</li>
-							))
-						}
-					</Grid>
-				</div>
-			</section>
-		</main>
+      </section>
 
-		<ContactCTA />
-	</div>
+ 
+<section>
+<h1>Experiencia Laboral</h1>
+
+    <!-- Carta 1 -->
+    <div class="card">
+        <h2>Practicante de pricing y optimización de procesos</h2>
+        <h3>Kompass Cargo USA · nov. 2024 - actualidad · 3 meses</h3>
+
+        <p>Contacto directo y gestión de una cartera de más de 30 clientes, brindando propuestas personalizadas y fortaleciendo relaciones comerciales clave. Optimización del sistema de rates, reduciendo los tiempos de actualización en un 20% y mejorando la precisión en las cotizaciones.</p>
+        <div class="skills">
+            <span class="skill">Logística internacional</span>
+            <span class="skill">Prompts de inteligencia artificial</span>
+        </div>
+    </div>
+
+    <!-- Carta 2 -->
+    <div class="card">
+        <h2>Practicante de desarrollo full stack</h2>
+        <h3>trippio · mar. 2024 - Jun. 2024 · 4 meses</h3>
+  
+        <p>Implementación una interfaz de usuario altamente intuitiva con Next.js, lo que contribuyó a una mayor retención de usuarios en un 30%. Diseño y optimización un sistema de bases de datos, mejorando en un 15% la precisión de los algoritmos de IA.</p>
+        <div class="skills">
+            <span class="skill">Análisis de la información</span>
+            <span class="skill">MySQL</span>
+            <span class="skill">Nextjs</span>
+            <span class="skill">Gestión de proyectos</span>
+            <span class="skill">NodeJS</span>
+            <span class="skill">Desarrollo front end</span>
+        </div>
+    </div>
+
+    <!-- Carta 3 -->
+    <div class="card">
+        <h2>Coordinador de distribución y despacho</h2>
+        <h3>Inversiones MCT · jul. 2023 - feb. 2024 · 8 meses</h3>
+
+        <p>Gestión de un sistema de control de inventario que garantizó la disponibilidad del 100% de los productos en stock durante 8 meses consecutivos. Implementación estrategias proactivas que facilitaron el contacto directo con más de 20 clientes clave.</p>
+        <div class="skills">
+            <span class="skill">Actitud positiva</span>
+            <span class="skill">Gestión de ventas</span>
+            <span class="skill">Gestión de cuentas</span>
+            <span class="skill">Gestión de cobros</span>
+            <span class="skill">Análisis de la información</span>
+        </div>
+    </div>
+</section>
+
+
+    </main>
+
+
+  </div>
 </BaseLayout>
 
 <style>
-	.hero {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 2rem;
-	}
+   .project-link {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
 
-	.roles {
-		display: none;
-	}
+    .project-link:hover {
+      background-color: var(--accent-color);
+    }
+  .card {
+         
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px 0;
+            transition: transform 0.3s ease;
+        }
 
-	.hero img {
-		aspect-ratio: 5 / 4;
-		object-fit: cover;
-		object-position: top;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
-	}
+        .card:hover {
+            transform: translateY(-5px);
+        }
 
-	@media (min-width: 50em) {
-		.hero {
-			display: grid;
-			grid-template-columns: 6fr 4fr;
-			padding-inline: 2.5rem;
-			gap: 3.75rem;
-		}
+        .card h2 {
+            margin: 0;
+            font-size: 1.5em;
+        }
 
-		.roles {
-			margin-top: 0.5rem;
-			display: flex;
-			gap: 0.5rem;
-		}
+        .card h3 {
+            margin: 5px 0;
+            font-size: 1.2em;
+          
+        }
 
-		.hero img {
-			aspect-ratio: 3 / 4;
-			border-radius: 4.5rem;
-			object-fit: cover;
-		}
-	}
+        .card p {
+            margin: 10px 0;
+         
+        }
 
-	/* ====================================================== */
+        .skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
 
-	.section {
-		display: grid;
-		gap: 2rem;
-	}
+.skill {
+  background: var(--skill-bg-light);
+  color: var(--skill-text-light);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
 
-	.with-background {
-		position: relative;
-	}
+ .mention-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s forwards;
+  }
 
-	.with-background::before {
-		--hero-bg: var(--bg-image-subtle-2);
+  .mention-card:nth-child(1) {
+    animation-delay: 0.2s;
+  }
 
-		content: '';
-		position: absolute;
-		pointer-events: none;
-		left: 50%;
-		width: 100vw;
-		aspect-ratio: calc(2.25 / var(--bg-scale));
-		top: 0;
-		transform: translateY(-75%) translateX(-50%);
-		background:
-			url('/assets/backgrounds/noise.png') top center/220px repeat,
-			var(--hero-bg) center center / var(--bg-gradient-size) no-repeat,
-			var(--gray-999);
-		background-blend-mode: overlay, normal, normal, normal;
-		mix-blend-mode: var(--bg-blend-mode);
-		z-index: -1;
-	}
+  .mention-card:nth-child(2) {
+    animation-delay: 0.4s;
+  }
 
-	.with-background.bg-variant::before {
-		--hero-bg: var(--bg-image-subtle-1);
-	}
+  .study-icon {
+    color: #4a90e2; /* Color para los iconos */
+    transition: transform 0.3s ease;
+  }
 
-	.section-header {
-		justify-self: center;
-		text-align: center;
-		max-width: 50ch;
-		font-size: var(--text-md);
-		color: var(--gray-300);
-	}
+  .mention-card:hover .study-icon {
+    transform: scale(1.2);
+  }
 
-	.section-header h3 {
-		font-size: var(--text-2xl);
-	}
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+ .cta {
+    text-align: center;
+    margin-top: 20px;
+  }
 
-	@media (min-width: 50em) {
-		.section {
-			grid-template-columns: repeat(4, 1fr);
-			grid-template-areas: 'header header header header' 'gallery gallery gallery gallery';
-			gap: 5rem;
-		}
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 25px;
+    background-color: #25D366; /* WhatsApp green */
+    color: white;
+    font-size: 1.2em;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
 
-		.section.with-cta {
-			grid-template-areas: 'header header header cta' 'gallery gallery gallery gallery';
-		}
+  .cta-link:hover {
+    background-color: #128C7E; /* Darker green on hover */
+    transform: translateY(-5px);
+  }
 
-		.section-header {
-			grid-area: header;
-			font-size: var(--text-lg);
-		}
+  .cta-text {
+    margin-right: 10px;
+    font-weight: bold;
+  }
 
-		.section-header h3 {
-			font-size: var(--text-4xl);
-		}
+  .cta-icon {
+    transition: transform 0.3s ease;
+  }
 
-		.with-cta .section-header {
-			justify-self: flex-start;
-			text-align: left;
-		}
+  .cta-link:hover .cta-icon {
+    transform: scale(1.2);
+  }
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .project-card img{
+	width: clamp(100px, 50%, 50%);
+	border-radius
+  }
 
-		.gallery {
-			grid-area: gallery;
-		}
+  .text-content {
+  }
 
-		.cta {
-			grid-area: cta;
-		}
-	}
+  .title {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
 
-	/* ====================================================== */
+  .tagline {
+    font-size: 2rem;
+    color: var(--gray-500);
+    margin-bottom: 1rem;
+  }
 
-	.mention-card {
-		display: flex;
-		height: 7rem;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		border: 1px solid var(--gray-800);
-		border-radius: 1.5rem;
-		color: var(--gray-300);
-		background: var(--gradient-subtle);
-		box-shadow: var(--shadow-sm);
-	}
+  .roles {
+    display: flex;
+    gap: 1rem;
+  }
 
-	@media (min-width: 50em) {
-		.mention-card {
-			border-radius: 1.5rem;
-			height: 9.5rem;
-		}
-	}
+  .image-content img {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    border-radius: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .hero-container {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
+
+    .image-content {
+      flex-basis: 40%;
+    }
+
+    .text-content {
+      flex-basis: 55%;
+    }
+  }
+
+  .project-card {
+    border: 1px solid var(--gray-800);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    background: var(--background-light);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+  }
+
+  .project-card h4 {
+    font-size: var(--text-xl);
+    margin-top: 1rem;
+  }
+
+  .project-card p {
+    color: var(--gray-300);
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    justify-content: center;
+  }
+
+  .tag {
+    background: var(--gray-700);
+    color: var(--gray-100);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+  }
+
+  /* Define los colores */
+  :root {
+    --primary-color: #3498db;
+    --accent-color: #e74c3c;
+    --secondary-color: #2ecc71;
+    --highlight-color: #f39c12;
+  }
 </style>
+
